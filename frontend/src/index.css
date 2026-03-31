@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand tokens - Bollywood Noir */
+    --background: 0 17% 5%;
+    --foreground: 30 33% 94%;
+
+    --card: 24 24% 8%;
+    --card-foreground: 30 33% 94%;
+
+    --popover: 24 24% 8%;
+    --popover-foreground: 30 33% 94%;
+
+    --primary: 15 71% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 27 19% 12%;
+    --secondary-foreground: 30 33% 94%;
+
+    --muted: 27 19% 12%;
+    --muted-foreground: 30 12% 60%;
+
+    --accent: 36 87% 55%;
+    --accent-foreground: 0 17% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 26 18% 15%;
+    --input: 26 18% 15%;
+    --ring: 15 71% 52%;
+
+    --radius: 0.75rem;
+
+    /* Extended tokens */
+    --brand-black: 0 17% 5%;
+    --brand-card: 24 24% 8%;
+    --brand-surface: 27 19% 12%;
+    --brand-border: 26 18% 15%;
+
+    --coral: 15 71% 52%;
+    --coral-hover: 15 67% 46%;
+    --gold: 36 87% 55%;
+    --violet: 245 56% 67%;
+
+    --coral-glow: 0 0 40px rgba(216, 90, 48, 0.35);
+
+    /* Shadows */
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+    --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.6);
+    --shadow-coral-glow: 0 0 40px rgba(216, 90, 48, 0.35);
+    --shadow-gold-glow: 0 0 30px rgba(239, 159, 39, 0.25);
+
+    /* Transitions */
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--brand-card));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--coral));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--coral-hover));
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--coral)) hsl(var(--brand-card));
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
+
+/* Trust ticker marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* CTA pulse animation */
+@keyframes ctaPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(216, 90, 48, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(216, 90, 48, 0);
+  }
+}
+
+.animate-cta-pulse {
+  animation: ctaPulse 3s ease-in-out infinite;
+}
+
+/* Focus ring utility */
+.focus-coral:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--coral));
+}
+
+/* Font heading utility */
+.font-heading {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Selection color */
+::selection {
+  background: hsl(var(--coral) / 0.3);
+  color: hsl(var(--foreground));
+}
+
+@layer base {
+  [data-debug-wrapper="true"] {
+    display: contents !important;
+  }
+
+  [data-debug-wrapper="true"] > * {
+    margin-left: inherit;
+    margin-right: inherit;
+    margin-top: inherit;
+    margin-bottom: inherit;
+    padding-left: inherit;
+    padding-right: inherit;
+    padding-top: inherit;
+    padding-bottom: inherit;
+    column-gap: inherit;
+    row-gap: inherit;
+    gap: inherit;
+    border-left-width: inherit;
+    border-right-width: inherit;
+    border-top-width: inherit;
+    border-bottom-width: inherit;
+    border-left-style: inherit;
+    border-right-style: inherit;
+    border-top-style: inherit;
+    border-bottom-style: inherit;
+    border-left-color: inherit;
+    border-right-color: inherit;
+    border-top-color: inherit;
+    border-bottom-color: inherit;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+  .animate-cta-pulse {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
